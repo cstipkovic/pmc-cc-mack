@@ -6,22 +6,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <string.h>
 
 int main(int argc, const char * argv[]) {
-    int i, tam = 0;
-    char entrada[INT16_MAX];
+    int i, input;
+    unsigned long tam;
+    char str[INT16_MAX];
     
+    strcpy(str, "-124234.57237913");
+    
+    tam = strlen(str);
     
     i = 0;
     goto Q0;
+    
+/*Initial state, q0, can go to:
+ q1 if reads a number
+ q2 if the first input is a minus sinal
+ q5 if it's something else*/
 Q0:
+    /*If all the word has been read, print a error message, because it's not a
+     final state*/
     if (i == tam) {
-        printf("Entrada não aceita");
+        printf("Error, input wasn't read");
         exit(0);
     }
-    if ((int)entrada[i] ) {
+    
+    /*Transform the string in a integer, using ASCII table*/
+    input = (int)str[i];
+    
+    i++;
+    
+    /*The numbers are 48 until 57 in ASCII and the minus sinal is 45*/
+    if (input >= 48 && input <= 57) {
         goto Q1;
-    } else if (<#condition#>) {
+    } else if (input == 45) {
         goto Q2;
     } else {
         goto Q5;
@@ -29,9 +48,15 @@ Q0:
     
 Q1:
     if (i == tam) {
-        printf("Entrada não aceita");
+        printf("Error, input wasn't read");
+        exit(0);
     }
-    if (<#condition#>) {
+    
+    input = (int)str[i];
+    
+    i++;
+    
+    if (input >= 48 && input <= 57) {
         goto Q2;
     } else {
         goto Q5;
@@ -39,11 +64,18 @@ Q1:
     
 Q2:
     if (i == tam) {
-        printf("Entrada aceita");
+        printf("Success!");
+        exit(0);
     }
-    if (<#condition#>) {
+    
+    input = (int)str[i];
+    
+    i++;
+    
+    /*The dot used to express a float number is 46 in ASCII table*/
+    if (input >= 48 && input <= 57) {
         goto Q2;
-    } else if (<#condition#>) {
+    } else if (input == 46) {
         goto Q3;
     } else {
         goto Q5;
@@ -51,9 +83,15 @@ Q2:
     
 Q3:
     if (i == tam) {
-        printf("Entrada não aceita");
+        printf("Error, input wasn't read");
+        exit(0);
     }
-    if (<#condition#>) {
+    
+    input = (int)str[i];
+    
+    i++;
+    
+    if (input >= 48 && input <= 57) {
         goto Q4;
     } else {
         goto Q5;
@@ -61,9 +99,15 @@ Q3:
     
 Q4:
     if (i == tam) {
-        printf("Entrada aceita");
+        printf("Success!");
+        exit(0);
     }
-    if (<#condition#>) {
+    
+    input = (int)str[i];
+    
+    i++;
+    
+    if (input >= 48 && input <= 57) {
         goto Q4;
     } else {
         goto Q5;
@@ -71,8 +115,10 @@ Q4:
     
 Q5:
     if (i == tam) {
-        printf("Entrada não aceita");
+        printf("Error, input wasn't read");
+        exit(0);
     }
+    i++;
     goto Q5;
     
     
